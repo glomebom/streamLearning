@@ -34,11 +34,16 @@
                                     <action selector="stopWork:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dgu-0R-Y0R"/>
                                 </connections>
                             </button>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="pT5-3j-mx3">
+                                <rect key="frame" x="121" y="282" width="150" height="4"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </progressView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
+                        <outlet property="progressBarView" destination="pT5-3j-mx3" id="snH-QT-zkv"/>
                         <outlet property="startDownload" destination="TTq-0w-QEA" id="bSw-90-IBa"/>
                         <outlet property="stopDownload" destination="cbx-7f-2hH" id="Scx-9k-NDz"/>
                     </connections>

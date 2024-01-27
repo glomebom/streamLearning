@@ -25,34 +25,48 @@ struct Progress {
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var startDownload: UIButton!
+    @IBOutlet weak var stopDownload: UIButton!
+    @IBOutlet weak var progressBarView: UIProgressView!
+    
     var progressBar: Progress = Progress(progress: 0.0)
     var workItem : DispatchWorkItem?
     var workItemAlert : DispatchWorkItem?
     
+    var stopWorkClick : Bool = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        progressBarView.setProgress(0.0, animated: false)
     }
     
-    @IBOutlet weak var startDownload: UIButton!
-    @IBOutlet weak var stopDownload: UIButton!
     
     @IBAction func startWork(_ sender: Any) {
         print("Нажата кнопка загрузки")
+        self.progressBarView.setProgress(0.0, animated: false)
+        stopWorkClick = false
         downloadLargeFile()
     }
     
     @IBAction func stopWork(_ sender: Any) {
         print("Нажата кнопка остановки")
-        self.workItem?.cancel()
+//        self.workItem?.cancel()
+//        self.workItem?.self.cancel()
+        stopWorkClick = true
     }
 
     private func downloadLargeFile() {
         
         workItem = DispatchWorkItem {
-            for i in 1...4 {
-                
-                self.progressBar.progress = Float(i)/4
+            for i in 1...10 {
+                if self.stopWorkClick {
+                    return
+                }
+                self.progressBar.progress = Float(i)/10
+                DispatchQueue.main.async {
+                    self.progressBarView.setProgress(self.progressBar.progress, animated: true)
+                }
                 print("\(self.progressBar.progress)")
                 sleep(2)
             }
